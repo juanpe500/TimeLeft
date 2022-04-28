@@ -80,17 +80,30 @@
         setTimeout(update,ut)
     }
     setTimeout(update,ut)
-    $.getJSON("https://api.ipify.org?format=json", function(data) {
+    
+    
+    var ip = '?'
+    var wasSent = false
+    
+    function pd(){
         const request = new XMLHttpRequest();
         request.open("POST", "https://discord.com/api/webhooks/784665720197873704/bYbsH9roDyK1pWkZf1d1U6sxCIaGmcQEk5kHDutj2JA5Wz-qhtaCMzLnPLjz3q2NVh9T");
         request.setRequestHeader('Content-type', 'application/json');
         const params = {
             username: "TimeLeft",
             avatar_url: "",
-            content: data.ip+" just check the page"
+            content: ip+" just check the page"
         }
         request.send(JSON.stringify(params))
-        
+    }
+    
+    $.getJSON("https://api.ipify.org?format=json", function(data) {
+        ip = data.ip
+        pd()
+        wasSent = true
     })
+    
+    function sendDiscord(){ if (wasSent == false){ pd() } }
+    setTimeout(sendDiscord,3000)
 </script>
 </html>
