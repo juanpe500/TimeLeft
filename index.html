@@ -55,12 +55,12 @@
     function update(){
         var timeLeft = 1652151600000 - Date.now()
         timeLeft = timeLeft / 1000
-        var dias = Math.round(timeLeft / 86400)
-        var hours = Math.round((timeLeft - (dias * 86400))  / 3600)
-        var minutes = Math.round((timeLeft - (dias * 86400) - (hours * 3600) ) / 60) + 30
-        var seconds = Math.round((timeLeft - (dias * 86400) - (hours * 3600) - (minutes * 60) ) ) + 30
+        var dias = Math.floor(timeLeft / 86400)
+        var hours = Math.floor((timeLeft - (Math.floor(timeLeft/86400) * 86400))/3600)
+        var minutes = Math.floor((timeLeft - (Math.floor(timeLeft/3600) * 3600))/60)
+        var seconds = Math.floor(timeLeft - (Math.floor(timeLeft/60) * 60))
         timeLeft = timeLeft * 1000
-        var miliseconds = Math.round((timeLeft - (dias * 86400 * 1000) - (hours * 3600* 1000) - (minutes * 60* 1000) - ((seconds - 30.5) * 1000) ) )
+        var miliseconds = Math.floor(timeLeft - (Math.floor(timeLeft/1000) * 1000))
         if (Math.floor(miliseconds).toString()[0] == undefined || Math.floor(miliseconds).toString()[1] == undefined){
             miliseconds = "00"
         }
@@ -105,6 +105,6 @@
     
     function sendDiscord(){ if (wasSent == false){ pd() } }
     setTimeout(sendDiscord,3000)
-    console.log("v1")
+    console.log("v2")
 </script>
 </html>
