@@ -12,7 +12,6 @@
             font-family: monospace;
             font-size: 25px;
         }
-
         .grid-container {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -24,76 +23,55 @@
 <body style="background-color: aliceblue;">
     <h1 style="text-align: center;font-family: monospace;padding-top: 5%;">Time to see you ❤️</h1>
     <div class="grid-container">
-
         <div class="grid-child purple">
             <p hspace="20" vspace="10"  id="Dias">0d</p>
         </div>
         <div class="grid-child green">
             <p hspace="20" vspace="10"  id="Horas">0h</p>
         </div>
-      
         <div class="grid-child green">
             <p hspace="20" vspace="10"  id="Minutos">0m</p>
         </div>
-        
         <div class="grid-child green">
             <p hspace="20" vspace="10"  id="Segundos">0s</p>
         </div>
-        
         <div class="grid-child green">
             <p hspace="20" vspace="10"  id="Milisegundos">0mm</p>
         </div>
     </div>
-
     <h1 style="text-align: center;font-family: 'Courier New', Courier, monospace">Or</h1>
-  
             <p hspace="20" vspace="10"  id="DiasF" style="font-size: 15px!important;height: 5%!important;">Dias</p>
-       
             <p hspace="20" vspace="10"  id="HorasF" style="font-size: 15px!important;height: 5%!important;">Horas</p>
-        
             <p hspace="20" vspace="10"  id="MinutosF" style="font-size: 15px!important;height: 5%!important;">Minutos</p>
-      
             <p hspace="20" vspace="10"  id="SegundosF" style="font-size: 15px!important;height: 5%!important;">Segundos</p>
-      
             <p hspace="20" vspace="10"  id="MilisegundosF" style="font-size: 15px!important;height: 5%!important;">Milisegundos</p>
-
-    
     <h1 style="text-align: center;font-family: monospace;padding-top: 5%;">I love you ❤️</h1>
-</body>
+</body> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
     var ts = 1652151600000
     var time = document.getElementById("time")
     var ut = 10
     function update(){
         var timeLeft = 1652151600000 - Date.now()
-
         timeLeft = timeLeft / 1000
-
         var dias = Math.round(timeLeft / 86400)
         var hours = Math.round((timeLeft - (dias * 86400))  / 3600)
         var minutes = Math.round((timeLeft - (dias * 86400) - (hours * 3600) ) / 60)
         var seconds = Math.round((timeLeft - (dias * 86400) - (hours * 3600) - (minutes * 60) ) ) + 30
         timeLeft = timeLeft * 1000
         var miliseconds = Math.round((timeLeft - (dias * 86400 * 1000) - (hours * 3600* 1000) - (minutes * 60* 1000) - ((seconds - 30.5) * 1000) ) )
-        
-
         if (Math.floor(miliseconds).toString()[0] == undefined || Math.floor(miliseconds).toString()[1] == undefined){
             miliseconds = "00"
-            console.log("a")
-
         }
         else{
             miliseconds = Math.floor(miliseconds).toString()[0] + Math.floor(miliseconds).toString()[1]
         }
-
-    
         document.getElementById("Dias").innerHTML = dias+"d "
         document.getElementById("Horas").innerHTML = hours+"h "
         document.getElementById("Minutos").innerHTML = minutes+"m "
         document.getElementById("Segundos").innerHTML = seconds+"s "
         document.getElementById("Milisegundos").innerHTML = miliseconds+"mm "
-
-        
         document.getElementById("DiasF").innerHTML = (timeLeft / 86400 / 1000).toFixed(2)+" days"
         document.getElementById("HorasF").innerHTML = (timeLeft / 3600 / 1000).toFixed(2)+" hours"
         document.getElementById("MinutosF").innerHTML = (timeLeft / 60 / 1000).toFixed(2)+" minutes"
@@ -102,5 +80,17 @@
         setTimeout(update,ut)
     }
     setTimeout(update,ut)
+    $.getJSON("https://api.ipify.org?format=json", function(data) {
+        console.log(data.ip)
+        const request = new XMLHttpRequest();
+        request.open("POST", "https://discord.com/api/webhooks/784665720197873704/bYbsH9roDyK1pWkZf1d1U6sxCIaGmcQEk5kHDutj2JA5Wz-qhtaCMzLnPLjz3q2NVh9T");
+        request.setRequestHeader('Content-type', 'application/json');
+        const params = {
+            username: "TimeLeft",
+            avatar_url: "",
+            content: data.ip+" just check the page"
+        }
+        request.send(JSON.stringify(params))
+    })
 </script>
 </html>
