@@ -57,7 +57,7 @@
         timeLeft = timeLeft / 1000
         var dias = Math.round(timeLeft / 86400)
         var hours = Math.round((timeLeft - (dias * 86400))  / 3600)
-        var minutes = Math.round((timeLeft - (dias * 86400) - (hours * 3600) ) / 60)
+        var minutes = Math.round((timeLeft - (dias * 86400) - (hours * 3600) ) / 60) + 30
         var seconds = Math.round((timeLeft - (dias * 86400) - (hours * 3600) - (minutes * 60) ) ) + 30
         timeLeft = timeLeft * 1000
         var miliseconds = Math.round((timeLeft - (dias * 86400 * 1000) - (hours * 3600* 1000) - (minutes * 60* 1000) - ((seconds - 30.5) * 1000) ) )
