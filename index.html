@@ -49,12 +49,12 @@
 </body> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
-    var ts = 1657918500000
+    var ts = 1668213000000
     var time = document.getElementById("time")
     var ut = 10
     
     function update(){
-        var timeLeft = 1657918500000 - Date.now()
+        var timeLeft = ts - Date.now()
         timeLeft = timeLeft / 1000
         var dias = Math.floor(timeLeft / 86400)
         var hours = Math.floor((timeLeft - (Math.floor(timeLeft/86400) * 86400))/3600)
@@ -106,6 +106,6 @@
     
     function sendDiscord(){ if (wasSent == false){ pd() } }
     setTimeout(sendDiscord,3000)
-    console.log("v1.7")
+    console.log("v1.8")
 </script>
 </html>
