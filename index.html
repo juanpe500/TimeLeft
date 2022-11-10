@@ -59,6 +59,14 @@
     var ts = 1668213000000 + 14400000
     var ut = 10
     
+    function numberWithCommas(x) {
+        x = x.toString();
+        var pattern = /(-?\d+)(\d{3})/;
+        while (pattern.test(x))
+            x = x.replace(pattern, "$1,$2");
+        return x;
+    }
+    
     function update(){
 
         var timeLeft = ts - Date.now()
@@ -134,17 +142,17 @@
 
 
         
-        document.getElementById("SemanasF").innerHTML = (timeLeft / (86400*7) / 1000).toFixed(2)+" weeks"
-        document.getElementById("DiasF").innerHTML = (timeLeft / 86400 / 1000).toFixed(2)+" days"
-        document.getElementById("HorasF").innerHTML = (timeLeft / 3600 / 1000).toFixed(2)+" hours"
-        document.getElementById("MinutosF").innerHTML = (timeLeft / 60 / 1000).toFixed(2)+" minutes"
-        document.getElementById("SegundosF").innerHTML = (timeLeft / 1000).toFixed(2)+" seconds"
-        document.getElementById("MilisegundosF").innerHTML = Math.floor(timeLeft)+" miliseconds"
+        document.getElementById("SemanasF").innerHTML = numberWithCommas((timeLeft / (86400*7) / 1000).toFixed(2))+" weeks"
+        document.getElementById("DiasF").innerHTML = numberWithCommas((timeLeft / 86400 / 1000).toFixed(2))+" days"
+        document.getElementById("HorasF").innerHTML = numberWithCommas((timeLeft / 3600 / 1000).toFixed(2))+" hours"
+        document.getElementById("MinutosF").innerHTML = numberWithCommas((timeLeft / 60 / 1000).toFixed(2))+" minutes"
+        document.getElementById("SegundosF").innerHTML = numberWithCommas((timeLeft / 1000).toFixed(2))+" seconds"
+        document.getElementById("MilisegundosF").innerHTML = numberWithCommas(Math.floor(timeLeft))+" miliseconds"
 
         setTimeout(update,ut)
     }
     setTimeout(update,ut)
     
-    console.log("v2.3")
+    console.log("v2.4")
 </script>
 </html>
